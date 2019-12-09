@@ -34,6 +34,7 @@ var processData = function(data) {
       return 1;
     }
   });
+  // console.log
   displayData({results: sortedData}, userSelected); // eslint-disable-line no-use-before-define
 };
 
@@ -104,6 +105,15 @@ var displayData = function(data, user) {
   });
 };
 
+var update = function (message,username){
+var timestamp = moment(new Date.format('h:mm:ss a'));
+var msg = `<li data-username="fdg">
+<a class="onlyUser"> ${username}</a><span></span>
+<a class="addUser">: </a><p> ${message} </p></li>`
+
+  $('#main').find('ul').append(msg)
+}
+//this function have type 'POST' which means it will send data to the server
 var postData = function(message, username) {
   $.ajax({
     url: SERVER_URL,
@@ -114,7 +124,11 @@ var postData = function(message, username) {
       text: message
     }),
     success: function(data) {
-      console.log('Success!', data);
+      console.log('Success!', message);
+      // displayData(message,username)
+       // processData(data)
+       update(message)
+
     },
     error: function(data) {
       console.log(data);
